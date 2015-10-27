@@ -25,16 +25,80 @@
     </div>
   </div>
 </div>
-<div class="content">
-  <div class="row">
-    <div class="box box--centered">
-      <div role="button" tabindex="7" aria-label="Download" class="Download"
-           data-progressbar-label="Downloading item..."></div>
-      <br>
+
+<%= yield %>
+
+<div class="container">
+  <h2>Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" id="open" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+          <input type="text" id="myInput">
+          <div class="content">
+            <div class="row">
+              <div class="box box--centered">
+                <div role="button" , id="Download" data-progressbar-label="Downloading item..."></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
     </div>
   </div>
+
 </div>
-<%= yield %>
+
+
+
+<script type="text/javascript">
+    $('#myModal').on('shown.bs.modal', function () {
+
+        $("#Download").eq(0).ElasticProgress({
+            buttonSize: 60,
+            width: 200,
+            align: "center",
+            colorFg: "#686e85",
+            colorBg: "#b4bad2",
+            highlightColor: "#ffab91",
+            onOpen: function(event) {
+                console.log("onOpen");
+                fakeLoading($(this));
+            },
+            onComplete: function(event) {
+                console.log("onComplete");
+            },
+            onClose: function(event) {
+                console.log("onClose");
+            },
+            onFail: function(event) {
+                console.log("onFail");
+                $(this).ElasticProgress("open");
+            },
+            onCancel: function(event) {
+                console.log("onCancel");
+                $(this).ElasticProgress("open");
+            }
+        });
+        $("#Download").eq(0).ElasticProgress("open");
+    })
+</script>
 
 </body>
 </html>
